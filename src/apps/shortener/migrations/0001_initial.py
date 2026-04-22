@@ -4,23 +4,32 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ShortenedURL',
+            name="ShortenedURL",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('url', models.URLField(max_length=2000)),
-                ('code', models.CharField(db_index=True, max_length=10)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("url", models.URLField(max_length=2000)),
+                ("code", models.CharField(db_index=True, max_length=10)),
             ],
             options={
-                'constraints': [models.UniqueConstraint(fields=('code',), name='unique_code'), models.UniqueConstraint(fields=('url',), name='unique_url')],
+                "constraints": [
+                    models.UniqueConstraint(fields=("code",), name="unique_code"),
+                    models.UniqueConstraint(fields=("url",), name="unique_url"),
+                ],
             },
         ),
     ]

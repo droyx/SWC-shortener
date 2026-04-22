@@ -6,7 +6,7 @@ from django.db.utils import IntegrityError
 
 
 class Shortener:
-    def __init__(self, shorted_code_length: int = 8):
+    def __init__(self, shorted_code_length: int = 8) -> None:
         self.shorted_code_length = shorted_code_length
 
     def create_shorted_url(self, url: str) -> ShortenedURL:
