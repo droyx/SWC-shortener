@@ -11,7 +11,7 @@ class TestGenerateCode(TestCase):
         self.assertIsInstance(result, str)
         self.assertEqual(len(result), 10)
 
-    def test_multiple_generated_codes(self):
+    def test_multiple_generated_codes_are_random(self):
         # When
         code1 = generate_code(n=10)
         code2 = generate_code(n=10)

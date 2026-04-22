@@ -10,14 +10,12 @@ class Shortener:
         self.shorted_code_length = shorted_code_length
 
     def create_shorted_url(self, url: str) -> ShortenedURL:
-        for i in range(10):
-            code = generate_code(self.shorted_code_length)
-            try:
-                shorten, _ = ShortenedURL.objects.get_or_create(
-                    url=url, defaults={"code": code}
-                )
-            except IntegrityError:
-                continue
-            return shorten
 
-        raise CreateShortException()
+        code = generate_code(self.shorted_code_length)
+        try:
+            shorten, _ = ShortenedURL.objects.get_or_create(
+                url=url, defaults={"code": code}
+            )
+        except IntegrityError:
+            raise CreateShortException()
+        return shorten
