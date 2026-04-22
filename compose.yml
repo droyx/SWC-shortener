@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        - DEVELOPMENT=1
+    image: swc
+    env_file:
+      - .env
+    volumes:
+      - ./src:/srv/applications/swc
+    networks:
+      - default
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+  postgres:
+    image: postgres:18
+    volumes:
+      - ./docker/postgres/volumes/var/lib/postgresql/postgresql:/var/lib/postgresql/postgresql
+    environment:
+      - POSTGRES_USER=swc
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U swc" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - default
