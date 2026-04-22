@@ -1,4 +1,4 @@
-Prosta aplikacja do skracanie linków.
+Prosta aplikacja do skracania linków.
 
 
 ## Uruchamianie lokalne
